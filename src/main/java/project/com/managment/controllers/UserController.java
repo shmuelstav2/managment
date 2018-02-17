@@ -60,9 +60,10 @@ public class UserController {
     @PostMapping("/login")
 
     public ResponseEntity <String> checkUserLogin(@RequestBody User user){
-        User current = userService.getUserByIdNumber(user.getIdNumber());
+        //User current = userService.getUserByIdNumber(user.getIdNumber());
+        User current =new User();
         JSONObject jo = new JSONObject();
-        if(current== null){
+        if(current.getId()== null){
             // if the user doesnt exist return 5
             jo.put("status", 5);
         }else {
@@ -74,7 +75,20 @@ public class UserController {
                 jo.put("status", current.getRole());
             }
         }
+
         return new ResponseEntity <String>(jo.toString(),
                 HttpStatus.OK);
     }
+
+
+    @ApiOperation(value = "update the user by the idNumber", notes = "Please be carefill provide only the new data")
+    @PutMapping({"/{idNumber}"})
+    public ResponseEntity <User> updateUser(@PathVariable int idNumber, @RequestBody User user) {
+        return new ResponseEntity<User>(userService.updateUser(idNumber, user),
+                HttpStatus.OK);
+    }
+    //    return new ResponseEntity <String>("huiyhui",
+      //          HttpStatus.OK);
 }
+
+

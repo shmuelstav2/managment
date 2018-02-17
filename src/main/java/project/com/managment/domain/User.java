@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @NoArgsConstructor
-//@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"idNumber"})})
+@Table(name = "users",uniqueConstraints={@UniqueConstraint(columnNames = {"idNumber"})})
 public class User {
     public User(String name, String firstName, String lastName, Role role, Boolean active, int idNumber, Date createdDate, int payDay, int additionHourPay) {
         this.name = name;

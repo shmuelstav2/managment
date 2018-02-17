@@ -15,6 +15,7 @@ public interface UserService {
     User createNewUser(User user);
     public User getUserById(Long id);
     List<User> getUsersByLastName(String roleDescription);
+    public User updateUser(int  idNumber, User user);
 
 
 }
