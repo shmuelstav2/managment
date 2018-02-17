@@ -1,4 +1,7 @@
 package project.com.managment.bootstrap;
+import project.com.managment.domain.Address;
+import project.com.managment.domain.Location;
+import project.com.managment.domain.Project;
 import project.com.managment.domain.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -6,23 +9,24 @@ import org.springframework.stereotype.Component;
         import org.springframework.boot.CommandLineRunner;
         import org.springframework.stereotype.Component;
 import project.com.managment.repositories.UserRepository;
-
+import project.com.managment.repositories.ProjectRepository;
 /**
  * Created by jt on 9/24/17.
  */
 @Component
 public class Bootstrap implements CommandLineRunner {
     private final UserRepository userRepository;
-
+    private final ProjectRepository projectRepository;
     //private final CustomerRepository customerRepository;
     /*private final VendorRepository vendorRepository;
   */
-    public Bootstrap(UserRepository userRepository
+    public Bootstrap(UserRepository userRepository,ProjectRepository projectRepository
     /*, CustomerRepository customerRepository, VendorRepository vendorRepository*/
     )
     {
 
         this.userRepository = userRepository;
+        this.projectRepository =projectRepository;
      /*   this.customerRepository = customerRepository;
         this.vendorRepository = vendorRepository;
         */
@@ -32,6 +36,7 @@ public class Bootstrap implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
          loadUsers();
+         loadProjects();
   //      loadCustomers();
    //     loadVendors();
     }
@@ -46,6 +51,19 @@ public class Bootstrap implements CommandLineRunner {
         //vendor2.setName("Vendor 2");
         //vendorRepository.save(vendor2);
 
+    }
+
+    private void loadProjects(){
+        Project project1 = new Project();
+        Address address1 = new Address();
+        address1.setCity("lod");
+        project1.setOwner(2);
+        Location lc1 =new Location();
+        lc1.setLatitude(453534);
+        lc1.setLongitude(5476547);
+        address1.setLocation(lc1);
+        project1.setAddress(address1);
+        projectRepository.save(project1);
     }
 
 
