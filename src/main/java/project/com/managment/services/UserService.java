@@ -14,4 +14,7 @@ public interface UserService {
     User getUserByIdNumber(int idNumber);
     User createNewUser(User user);
     public User getUserById(Long id);
+    List<User> getUsersByLastName(String roleDescription);
+
+
 }

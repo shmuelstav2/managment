@@ -1,6 +1,8 @@
 package project.com.managment.controllers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.json.JSONObject;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -47,9 +49,32 @@ public class UserController {
     }
 
 
-   /* @GetMapping (params = "firstName")
-    public Iterable<User> findByFirstName(
-            @Spec(path = "firstName", spec = Like.class) Specification<User> spec) {
-        return userService.findAll(spec);
-    }*/
+
+    @ApiOperation(value = "get user by last name", notes = "These are some notes about the API.")
+    @GetMapping({"/lastname/{lastname}"})
+    public ResponseEntity<List<User>> getUserById(@PathVariable String lastname){
+        return new ResponseEntity<List<User>>(userService.getUsersByLastName(lastname), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "check login operation", notes = "These are some notes about the API.")
+    @PostMapping("/login")
+
+    public ResponseEntity <String> checkUserLogin(@RequestBody User user){
+        User current = userService.getUserByIdNumber(user.getIdNumber());
+        JSONObject jo = new JSONObject();
+        if(current== null){
+            // if the user doesnt exist return 5
+            jo.put("status", 5);
+        }else {
+            if(!current.getPassword().equals(user.getPassword())){
+                //if the use exist but the passo 4
+                jo.put("status", 4);
+            }else{
+                // and if both are true return the role number
+                jo.put("status", current.getRole());
+            }
+        }
+        return new ResponseEntity <String>(jo.toString(),
+                HttpStatus.OK);
+    }
 }

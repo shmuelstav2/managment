@@ -21,7 +21,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByIdNumber(int idNumber) {
-        return null;
+        User foundUser = userRepository.getDistinctFirstByIdNumber(idNumber);
+        return foundUser;
     }
 
     @Override
@@ -34,5 +35,11 @@ public class UserServiceImpl implements UserService {
     public User getUserById(Long id) {
         User foundUser = userRepository.findOne(id);
         return foundUser;
+    }
+
+
+    @Override
+    public List<User> getUsersByLastName(String lastName) {
+        return userRepository.findAllByLastName(lastName);
     }
 }

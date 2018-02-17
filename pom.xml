@@ -71,6 +71,18 @@
             <artifactId>cxf-rt-frontend-jaxrs</artifactId>
             <version>3.1.11</version>
         </dependency>
+        <dependency>
+            <groupId>org.sonatype.forge</groupId>
+            <artifactId>forge-parent</artifactId>
+            <version>38</version>
+            <type>pom</type>
+        </dependency>
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20170516</version>
+		</dependency>
     </dependencies>
 
 	<build>
