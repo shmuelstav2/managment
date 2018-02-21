@@ -1,45 +1,129 @@
 package project.com.managment.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.awt.*;
+import java.util.ArrayList;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
-import lombok.Data;
-        import lombok.NoArgsConstructor;
-
-        import java.util.Date;
-
-        import javax.persistence.*;
-
-
-@Data
 @Entity
-@NoArgsConstructor
 @Table(name = "projects",uniqueConstraints={@UniqueConstraint(columnNames = {"id"})})
 public class Project {
 
+
+    public Project() {
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int owner;
+    //private int owner;
     private int partner;
     private String projectName;
     @Embedded
     private Address address ;
-}
-   // private address Address
-    //private comment;
-      //  image Image
-   /*entity Address{
-        street String
-        homeNumber Integer
-        city String
-        location Location
+    @JsonManagedReference
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private Set<Concat> concats = new HashSet<Concat>(
+            0);
+
+    private String comment;
+   // private Image image;
+    private int tripAhead;
+    private int tripBack;
+
+    public Long getId() {
+        return id;
     }
-  /* entity Location{
-        east Integer
-        south Integer
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getPartner() {
+        return partner;
+    }
+
+    public void setPartner(int partner) {
+        this.partner = partner;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Set<Concat> getConcats() {
+        return this.concats;
+    }
+
+    public void setConcats(Set<Concat> concats) {
+        this.concats = concats;
+    }
+
+    public void addConcat(Concat concat) {
+        concats.add(concat);
+        concat.setProject(this);
+    }
+
+    public void removeConcat(Concat concat) {
+        concats.remove(concat);
+        concat.setProject(null);
+    }
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+   /* public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }*/
+
+    public int getTripAhead() {
+        return tripAhead;
+    }
+
+    public void setTripAhead(int tripAhead) {
+        this.tripAhead = tripAhead;
+    }
+
+    public int getTripBack() {
+        return tripBack;
+    }
+
+    public void setTripBack(int tripBack) {
+        this.tripBack = tripBack;
+    }
+
+    @Override
+    public String toString() {
+        return "Project [id=" + id + ", name=" + projectName + ", concats=" + concats
+                + "]";
+    }
+}

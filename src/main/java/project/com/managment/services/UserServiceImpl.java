@@ -1,6 +1,7 @@
 package project.com.managment.services;
 
 import org.springframework.stereotype.Service;
+import project.com.managment.domain.Role;
 import project.com.managment.domain.User;
 import project.com.managment.repositories.UserRepository;
 
@@ -50,6 +51,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getUsersByLastName(String lastName) {
         return userRepository.findAllByLastName(lastName);
+    }
+
+    @Override
+    public List<User> getUsersByRole(Role roleDescription) {
+        return userRepository.findAllByRole(roleDescription);
     }
 
     private User saveAndReturnUser(User user) {

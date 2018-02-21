@@ -1,4 +1,5 @@
 package project.com.managment.services;
+import project.com.managment.domain.Role;
 import project.com.managment.domain.User;
 import java.util.List;
 
@@ -14,7 +15,8 @@ public interface UserService {
     User getUserByIdNumber(int idNumber);
     User createNewUser(User user);
     public User getUserById(Long id);
-    List<User> getUsersByLastName(String roleDescription);
+    List<User> getUsersByLastName(String lastName);
+    List<User> getUsersByRole(Role roleDescription);
     public User updateUser(int  idNumber, User user);
 
 

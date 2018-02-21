@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import project.com.managment.domain.Role;
 import project.com.managment.domain.User;
 import project.com.managment.services.UserService;
 
@@ -50,10 +51,16 @@ public class UserController {
 
 
 
-    @ApiOperation(value = "get user by last name", notes = "These are some notes about the API.")
-    @GetMapping({"/lastname/{lastname}"})
-    public ResponseEntity<List<User>> getUserById(@PathVariable String lastname){
-        return new ResponseEntity<List<User>>(userService.getUsersByLastName(lastname), HttpStatus.OK);
+    //@ApiOperation(value = "get user by last name", notes = "These are some notes about the API.")
+    //@GetMapping({"/lastname/{lastname}"})
+    //public ResponseEntity<List<User>> getUserById(@PathVariable String lastname){
+     //   return new ResponseEntity<List<User>>(userService.getUsersByLastName(lastname), HttpStatus.OK);
+    //}
+
+    @ApiOperation(value = "get user by Role", notes = "These are some notes about the API.")
+    @GetMapping({"/role/{role}"})
+    public ResponseEntity<List<User>> getUserById(@PathVariable Role role){
+        return new ResponseEntity<List<User>>(userService.getUsersByRole(role), HttpStatus.OK);
     }
 
     @ApiOperation(value = "check login operation", notes = "These are some notes about the API.")
