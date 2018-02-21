@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import project.com.managment.domain.Project;
+import project.com.managment.domain.Role;
 import project.com.managment.domain.User;
 import project.com.managment.services.ProjectService;
 import project.com.managment.services.UserService;
@@ -45,12 +46,15 @@ public class ProjectController {
     public ProjectController(ProjectService projectService) {
         this.projectService = projectService;
     }
-
-    @ApiOperation(value = "This will get a list of projects.", notes = "List of all the projects in the system")
-    @GetMapping
-    public ResponseEntity<Set<Project>> getallProject(){
-        Set<Project> projects = projectService.getAllProjects();
-        return new ResponseEntity<Set<Project>>(projects, HttpStatus.OK);
+    @ApiOperation(value = "get project by id partner", notes = "These are some notes about the API.")
+    @GetMapping({"/partner/{partner}"})
+    public ResponseEntity<Set<Project>> getProjectById(@PathVariable int partner){
+        return new ResponseEntity<Set<Project>>(projectService.getProjectByPartner(partner), HttpStatus.OK);
+    }
+    @ApiOperation(value = "get project by active or not", notes = "These are some notes about the API.")
+    @GetMapping({"/active/{active}"})
+    public ResponseEntity<Set<Project>> getProjectById(@PathVariable boolean active){
+        return new ResponseEntity<Set<Project>>(projectService.getProjectByActive(active), HttpStatus.OK);
     }
 
     @ApiOperation(value = "create new project", notes = "These are some notes about the API.")
@@ -70,7 +74,7 @@ public class ProjectController {
 
 
 
-    @ApiOperation(value = "update the project by the idNumber", notes = "Please be carefull provide only the new data")
+    @ApiOperation(value = "update the project by the id OF the project", notes = "Please be carefull provide only the new data")
     @PutMapping({"/{id}"})
     public ResponseEntity <Project> updateProject(@PathVariable Long id, @RequestBody Project project) {
         return new ResponseEntity<Project>(projectService.updateProject(id, project),

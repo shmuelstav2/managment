@@ -37,6 +37,5 @@ public class RestResponseEntityExceptionHandler  {
     @ExceptionHandler({Exception.class})
     public ResponseEntity<Object> handleException(Exception exception, WebRequest request){
         return new ResponseEntity<Object>("General exception", new HttpHeaders(), HttpStatus.BAD_REQUEST);
-
     }
 }

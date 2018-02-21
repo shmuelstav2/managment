@@ -14,5 +14,6 @@ public interface ProjectService {
     Project createNewProject(Project project);
     Project getProjectById(Long id);
     Set<Project> getProjectByPartner(int patner);
+      Set<Project> getProjectByActive(boolean active);
     Project updateProject(Long idNumber,Project project);
 }

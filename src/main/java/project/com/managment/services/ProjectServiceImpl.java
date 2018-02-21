@@ -57,6 +57,13 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public Set<Project> getProjectByActive(boolean active) {
+        Set<Project> projectSet = new HashSet<>();
+        projectRepository.findAllByActive(active).iterator().forEachRemaining(projectSet::add);
+        return projectSet;
+    }
+
+    @Override
     public Project updateProject(Long idNumber,Project project) {
         Project foundProject = projectRepository.findOne(idNumber);
         project.setId(foundProject.getId());
