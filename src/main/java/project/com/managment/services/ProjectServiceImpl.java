@@ -70,6 +70,12 @@ public class ProjectServiceImpl implements ProjectService {
         return saveAndReturnProject(project);
     }
 
+    @Override
+    public Project updateProjectImage(Long idNumber, String imageLink) {
+        Project foundProject = projectRepository.findOne(idNumber);
+        foundProject.setImageLink(imageLink);
+        return saveAndReturnProject( foundProject);
+    }
 
 
     private Project saveAndReturnProject(Project project) {

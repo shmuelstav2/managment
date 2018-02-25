@@ -36,7 +36,10 @@ public class Project {
             0);
 
     private String comment;
-   // private Image image;
+
+
+
+    private String imageLink;
     private int tripAhead;
     private int tripBack;
     private Boolean active;
@@ -105,7 +108,13 @@ public class Project {
     public void setComment(String comment) {
         this.comment = comment;
     }
+    public String getImageLink() {
+        return imageLink;
+    }
 
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
    /* public Image getImage() {
         return image;
     }

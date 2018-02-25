@@ -16,4 +16,5 @@ public interface ProjectService {
     Set<Project> getProjectByPartner(int patner);
       Set<Project> getProjectByActive(boolean active);
     Project updateProject(Long idNumber,Project project);
+    Project updateProjectImage(Long idNumber,String imageLink);
 }
