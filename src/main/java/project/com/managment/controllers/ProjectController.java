@@ -122,14 +122,27 @@ public class ProjectController {
             if (file.isEmpty()) {
                 continue; //next pls
             }
-            projectService.updateProjectImage(id ,id.toString()+file.getOriginalFilename());
+
+           String fileName = id.toString()+file.getOriginalFilename().substring(0,file.getOriginalFilename().indexOf('.'));
+            projectService.updateProjectImage(id ,fileName);
             byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOADED_FOLDER + id.toString()+file.getOriginalFilename());
+            Path path = Paths.get(UPLOADED_FOLDER+fileName+"png");
             Files.write(path, bytes);
 
         }
 
     }
+
+    @ApiOperation(value = "get images with the image name")
+    @RequestMapping(value = "/image/{imageName}",method = RequestMethod.GET)
+    @ResponseBody
+    public byte[] getImage(@PathVariable(value = "imageName") String imageName) throws IOException {
+
+        File serverFile = new File( UPLOADED_FOLDER + imageName+".png");
+
+        return Files.readAllBytes(serverFile.toPath());
+    }
+
 }
 
 
