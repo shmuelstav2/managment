@@ -35,6 +35,12 @@ public class Project {
     private Set<Concat> concats = new HashSet<Concat>(
             0);
 
+
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private Set<Purchase> purchases = new HashSet<Purchase>(
+            0);
     private String comment;
 
 
@@ -92,6 +98,16 @@ public class Project {
         this.concats = concats;
     }
 
+
+
+    public Set<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(Set<Purchase> purchases) {
+        this.purchases = purchases;
+    }
+
     public void addConcat(Concat concat) {
         concats.add(concat);
         concat.setProject(this);
@@ -100,6 +116,16 @@ public class Project {
     public void removeConcat(Concat concat) {
         concats.remove(concat);
         concat.setProject(null);
+    }
+
+    public void addPurcase(Purchase purchase) {
+        purchases.add(purchase);
+        purchase.setProject(this);
+    }
+
+    public void removePurchase(Purchase purchase) {
+        purchases.remove(purchase);
+        purchase.setProject(null);
     }
     public String getComment() {
         return comment;

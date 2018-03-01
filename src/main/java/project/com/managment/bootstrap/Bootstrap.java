@@ -49,6 +49,7 @@ public class Bootstrap implements CommandLineRunner {
         user1.setFirstName("Vendor 1");
         user1.setRole(MAINMANAGER);
         user1.setLastName("swefew");
+        user1.setIdNumber("1321313");
         //user1.setRole();
         userRepository.save(user1);
 
@@ -61,13 +62,18 @@ public class Bootstrap implements CommandLineRunner {
     private void loadProjects(){
         Project project1 = new Project();
         Address address1 = new Address();
-        address1.setCity("lod");
+        address1.setFullAdress("lod");
         Concat cn1 = new Concat();
         cn1.setFirstName("ihuih");
         Concat cn2 = new Concat();
         cn2.setFirstName("ihuikjlh");
         project1.addConcat(cn1);
         project1.addConcat(cn2);
+        Purchase p1 = new Purchase();
+        p1.setAmount(6);
+        p1.setComment("rstttrg rtyg6 g  54t54 4g45g54g54");
+        p1.setOperatorId("036913192");
+        project1.addPurcase(p1);
        // project1.setOwner(2);
         Location lc1 =new Location();
         lc1.setLatitude(453534);

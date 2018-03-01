@@ -2,14 +2,13 @@ package project.com.managment.services;
 
 import org.springframework.stereotype.Service;
 import project.com.managment.domain.Project;
+import project.com.managment.domain.Purchase;
 import project.com.managment.domain.Role;
 import project.com.managment.domain.User;
 import project.com.managment.repositories.ProjectRepository;
 import project.com.managment.repositories.UserRepository;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,8 +21,8 @@ public class ProjectServiceImpl implements ProjectService {
         this.projectRepository= projectRepository;
     }
 
-    //@Override
-    //public List<Project> getAllProjects() {
+    @Override
+    //public Set<Project> getAllProjects() {
      //   return projectRepository.findAll().stream().collect(Collectors.toList());
     //}
 
@@ -68,6 +67,19 @@ public class ProjectServiceImpl implements ProjectService {
         Project foundProject = projectRepository.findOne(idNumber);
         project.setId(foundProject.getId());
         return saveAndReturnProject(project);
+    }
+
+    @Override
+    public Purchase createNewPurchase( Long id, Purchase purchase){
+        Project foundProject = projectRepository.findOne(id);
+        foundProject.addPurcase(purchase);
+        Set <Purchase> purchases = saveAndReturnProject(foundProject).getPurchases();
+        final Iterator itr = purchases.iterator();
+        Object lastElement = itr.next();
+        while(itr.hasNext()) {
+            lastElement = itr.next();
+        }
+        return (Purchase) lastElement;
     }
 
     @Override

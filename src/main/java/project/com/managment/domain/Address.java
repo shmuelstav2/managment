@@ -11,9 +11,7 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @Embeddable
 public class Address {
-    private String street;
-    private int homeNumber;
-    private String city;
+    private String fullAdress;
     @Embedded
     private Location location;
 }

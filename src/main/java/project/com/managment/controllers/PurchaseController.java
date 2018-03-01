@@ -8,21 +8,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import project.com.managment.domain.*;
-import project.com.managment.services.ProjectService;
+import project.com.managment.services.PurchaseService;
 import project.com.managment.services.UserService;
-import static java.lang.System.out;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
+
 import java.io.File;
-import static java.lang.System.*;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import  java.io.*;
-import java.lang.Object.*;
+
 import io.swagger.annotations.Api;
         import io.swagger.annotations.ApiOperation;
         import org.json.JSONObject;
@@ -37,44 +33,34 @@ import io.swagger.annotations.Api;
         import org.springframework.http.ResponseEntity;
         import org.springframework.stereotype.Controller;
         import org.springframework.web.bind.annotation.*;
+        import project.com.managment.domain.Role;
         import project.com.managment.domain.User;
         import project.com.managment.services.UserService;
 
-import javax.imageio.ImageIO;
 import java.util.List;
 
-@Api(description = "manage all the projects data")
+@Api(description = "manage all the users data")
 @Controller
-@RequestMapping("/api/projects/")
-public class ProjectController {
-    private final ProjectService projectService;
+@RequestMapping("/api/purchases/")
+public class PurchaseController {
+    private final PurchaseService purchaseService;
 
-    public ProjectController(ProjectService projectService) {
-        this.projectService = projectService;
-    }
-    @ApiOperation(value = "get project by id partner", notes = "These are some notes about the API.")
-    @GetMapping({"/partner/{partner}"})
-    public ResponseEntity<Set<Project>> getProjectById(@PathVariable int partner){
-        return new ResponseEntity<Set<Project>>(projectService.getProjectByPartner(partner), HttpStatus.OK);
-    }
-    @ApiOperation(value = "get project by active or not", notes = "These are some notes about the API.")
-    @GetMapping({"/active/{active}"})
-    public ResponseEntity<Set<Project>> getProjectById(@PathVariable boolean active){
-        return new ResponseEntity<Set<Project>>(projectService.getProjectByActive(active), HttpStatus.OK);
+    public PurchaseController(PurchaseService purchaseService) {
+        this.purchaseService = purchaseService;
     }
 
-    @ApiOperation(value = "create new project", notes = "These are some notes about the API.")
-    @PostMapping
-    public ResponseEntity<Project> createNewProject(@RequestBody Project project){
-        return new ResponseEntity<Project>(projectService.createNewProject(project),
-                HttpStatus.CREATED);
+    @ApiOperation(value = "This will get a list of purchases.", notes = "These are some notes about the API.")
+    @GetMapping
+    public ResponseEntity<Set<Purchase>> getallPurchase(){
+        Set<Purchase> purchases = purchaseService.getAllPurchases();
+        return new ResponseEntity<Set<Purchase>>(purchases, HttpStatus.OK);
     }
 
-
+   /*
     @ApiOperation(value = "get project by id number", notes = "These are some notes about the API.")
     @GetMapping({"/{id}"})
-    public ResponseEntity<Project> getProjectById(@PathVariable Long id){
-        return new ResponseEntity<Project>(projectService.getProjectById(id), HttpStatus.OK);
+    public ResponseEntity<Purchase> getPurchaseById(@PathVariable Long id){
+        return new ResponseEntity<Purchase>(purchaseService.getPurchaseById(id), HttpStatus.OK);
     }
 
 
@@ -82,26 +68,18 @@ public class ProjectController {
 
     @ApiOperation(value = "update the project by the id OF the project", notes = "Please be carefull provide only the new data")
     @PutMapping({"/{id}"})
-    public ResponseEntity <Project> updateProject(@PathVariable Long id, @RequestBody Project project) {
-        return new ResponseEntity<Project>(projectService.updateProject(id, project),
+    public ResponseEntity <Purchase> updateProject(@PathVariable Long id, @RequestBody Purchase project) {
+        return new ResponseEntity<Purchase>(projectService.updatePurchase(id, project),
                 HttpStatus.OK);
     }
-
-
-    @ApiOperation(value = "create new purchase", notes = "These are some notes about the API.")
-    @PostMapping("/purchase/{id}")
-    public ResponseEntity<Purchase> createNewPurchase(@PathVariable Long id,@RequestBody Purchase purchase){
-        return new ResponseEntity<Purchase>(projectService.createNewPurchase(id,purchase),
-                HttpStatus.CREATED);
-    }
-
+  */
     Path path = FileSystems.getDefault().getPath(".");
     private String UPLOADED_FOLDER ="src\\main\\resources\\static\\";
     @ApiOperation(value = "image", notes = "Please be carefull provide only the new data")
-    @PostMapping({"/upload/{id}"})
+    @PostMapping({"/purchase/uploadimage/{id}"})
 
     public ResponseEntity<?> uploadFile(
-            @RequestParam("file") MultipartFile uploadfile,@PathVariable Long id) {
+            @RequestParam("file") MultipartFile uploadfile, @PathVariable Long id) {
 
 
         if (uploadfile.isEmpty()) {
@@ -130,12 +108,11 @@ public class ProjectController {
                 continue; //next pls
             }
 
-           String fileName = id.toString()+file.getOriginalFilename().substring(0,file.getOriginalFilename().indexOf('.'));
-            projectService.updateProjectImage(id ,fileName);
+            String fileName ="invoice"+ id.toString()+file.getOriginalFilename().substring(0,file.getOriginalFilename().indexOf('.'));
+            purchaseService.updatePurchaseImage(id ,fileName);
             byte[] bytes = file.getBytes();
             Path path = Paths.get(UPLOADED_FOLDER+fileName+"png");
             Files.write(path, bytes);
-
         }
 
     }
@@ -144,12 +121,9 @@ public class ProjectController {
     @RequestMapping(value = "/image/{imageName}",method = RequestMethod.GET)
     @ResponseBody
     public byte[] getImage(@PathVariable(value = "imageName") String imageName) throws IOException {
-
         File serverFile = new File( UPLOADED_FOLDER + imageName+".png");
-
         return Files.readAllBytes(serverFile.toPath());
     }
-
 }
 
 
