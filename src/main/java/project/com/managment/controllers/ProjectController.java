@@ -1,5 +1,13 @@
 package project.com.managment.controllers;
 
+
+import com.cloudinary.Cloudinary;
+import com.cloudinary.*;
+import com.cloudinary.utils.ObjectUtils;
+import java.io.File;
+import java.util.Map;
+import java.io.File;
+import java.util.Map;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.json.JSONObject;
@@ -21,6 +29,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+
 import  java.io.*;
 import java.lang.Object.*;
 import io.swagger.annotations.Api;
@@ -98,7 +107,7 @@ public class ProjectController {
     Path path = FileSystems.getDefault().getPath(".");
     private String UPLOADED_FOLDER ="src\\main\\resources\\static\\";
     @ApiOperation(value = "image", notes = "Please be carefull provide only the new data")
-    @PostMapping({"/upload/{id}"})
+    @PostMapping({"/uploadimage/{id}"})
 
     public ResponseEntity<?> uploadFile(
             @RequestParam("file") MultipartFile uploadfile,@PathVariable Long id) {
@@ -125,31 +134,26 @@ public class ProjectController {
     private void saveUploadedFiles(List<MultipartFile> files,Long id) throws IOException {
 
         for (MultipartFile file : files) {
+            File convFile = new File(file.getOriginalFilename());
+            convFile.createNewFile();
+            FileOutputStream fos = new FileOutputStream(convFile);
+            fos.write(file.getBytes());
+            fos.close();
+            //return convFile;
 
             if (file.isEmpty()) {
                 continue; //next pls
             }
-
-           String fileName = id.toString()+file.getOriginalFilename().substring(0,file.getOriginalFilename().indexOf('.'));
-            projectService.updateProjectImage(id ,fileName);
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOADED_FOLDER+fileName+"png");
-            Files.write(path, bytes);
-
+            Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+                    "cloud_name", "daezoaeee",
+                    "api_key", "752169828272875",
+                    "api_secret", "F0asv7iKUGV4LiSOrMuCeuMqd_U"));
+            Map uploadResult = cloudinary.uploader().upload(convFile, ObjectUtils.emptyMap());
+           String fileName = uploadResult.get("secure_url").toString();
+           projectService.updateProjectImage(id ,fileName);
         }
 
     }
-
-    @ApiOperation(value = "get images with the image name")
-    @RequestMapping(value = "/image/{imageName}",method = RequestMethod.GET)
-    @ResponseBody
-    public byte[] getImage(@PathVariable(value = "imageName") String imageName) throws IOException {
-
-        File serverFile = new File( UPLOADED_FOLDER + imageName+".png");
-
-        return Files.readAllBytes(serverFile.toPath());
-    }
-
 }
 
 

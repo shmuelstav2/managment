@@ -1,5 +1,7 @@
 package project.com.managment.controllers;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.json.JSONObject;
@@ -12,6 +14,7 @@ import project.com.managment.services.PurchaseService;
 import project.com.managment.services.UserService;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -73,8 +76,8 @@ public class PurchaseController {
                 HttpStatus.OK);
     }
   */
-    Path path = FileSystems.getDefault().getPath(".");
-    private String UPLOADED_FOLDER ="src\\main\\resources\\static\\";
+
+
     @ApiOperation(value = "image", notes = "Please be carefull provide only the new data")
     @PostMapping({"/purchase/uploadimage/{id}"})
 
@@ -103,26 +106,25 @@ public class PurchaseController {
     private void saveUploadedFiles(List<MultipartFile> files,Long id) throws IOException {
 
         for (MultipartFile file : files) {
+            File convFile = new File(file.getOriginalFilename());
+            convFile.createNewFile();
+            FileOutputStream fos = new FileOutputStream(convFile);
+            fos.write(file.getBytes());
+            fos.close();
+            //return convFile;
 
             if (file.isEmpty()) {
                 continue; //next pls
             }
-
-            String fileName ="invoice"+ id.toString()+file.getOriginalFilename().substring(0,file.getOriginalFilename().indexOf('.'));
+            Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+                    "cloud_name", "daezoaeee",
+                    "api_key", "752169828272875",
+                    "api_secret", "F0asv7iKUGV4LiSOrMuCeuMqd_U"));
+            Map uploadResult = cloudinary.uploader().upload(convFile, ObjectUtils.emptyMap());
+            String fileName = uploadResult.get("secure_url").toString();
             purchaseService.updatePurchaseImage(id ,fileName);
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOADED_FOLDER+fileName+"png");
-            Files.write(path, bytes);
         }
 
-    }
-
-    @ApiOperation(value = "get images with the image name")
-    @RequestMapping(value = "/image/{imageName}",method = RequestMethod.GET)
-    @ResponseBody
-    public byte[] getImage(@PathVariable(value = "imageName") String imageName) throws IOException {
-        File serverFile = new File( UPLOADED_FOLDER + imageName+".png");
-        return Files.readAllBytes(serverFile.toPath());
     }
 }
 

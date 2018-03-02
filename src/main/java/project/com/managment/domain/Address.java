@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 @Embeddable
 public class Address {
     private String fullAdress;
+    private String city;
     @Embedded
     private Location location;
 }
