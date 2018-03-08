@@ -11,13 +11,11 @@ import java.util.List;
 public interface UserService {
 
     List<User> getAllUsers();
-
-    User getUserByIdNumber(int idNumber);
+    User getUserByIdNumber(Long idNumber);
     User createNewUser(User user);
     public User getUserById(Long id);
-    List<User> getUsersByLastName(String lastName);
     List<User> getUsersByRole(Role roleDescription);
-    public User updateUser(int  idNumber, User user);
+    public User updateUser(Long  idNumber, User user);
 
 
 }

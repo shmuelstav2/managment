@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "users",uniqueConstraints={@UniqueConstraint(columnNames = {"idNumber"})})
 public class User {
-    public User( String firstName, String lastName, Role role, Boolean active, String idNumber, Date createdDate, int payDay, int additionHourPay) {
+    public User( String firstName, String lastName, Role role, Boolean active, Long idNumber, Date createdDate, int payDay, int additionHourPay) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -36,7 +36,7 @@ public class User {
 
     private Boolean active;
     @Column(nullable = false)
-    private String idNumber;
+    private Long idNumber;
     private Date createdDate;
     private int payDay;
     private int additionHourPay;

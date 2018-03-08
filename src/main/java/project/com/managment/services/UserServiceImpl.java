@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByIdNumber(int idNumber) {
+    public User getUserByIdNumber(Long idNumber) {
         User foundUser = userRepository.getDistinctFirstByIdNumber(idNumber);
         return foundUser;
     }
@@ -42,16 +42,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(int  idNumber, User user) {
+    public User updateUser(Long  idNumber, User user) {
         User foundUser = userRepository.getDistinctFirstByIdNumber(idNumber);
         user.setId(foundUser.getId());
         return saveAndReturnUser(user);
     }
 
-    @Override
-    public List<User> getUsersByLastName(String lastName) {
-        return userRepository.findAllByLastName(lastName);
-    }
 
     @Override
     public List<User> getUsersByRole(Role roleDescription) {

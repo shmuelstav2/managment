@@ -43,19 +43,18 @@ public class UserController {
         return new ResponseEntity<User>(userService.createNewUser(user),
                 HttpStatus.CREATED);
     }
-    @ApiOperation(value = "get user by id number", notes = "These are some notes about the API.")
+  /*  @ApiOperation(value = "get user by id number", notes = "These are some notes about the API.")
     @GetMapping({"/{id}"})
     public ResponseEntity<User> getUserById(@PathVariable Long id){
         return new ResponseEntity<User>(userService.getUserById(id), HttpStatus.OK);
     }
+*/
+    @ApiOperation(value = "get user by id of identication", notes = "These are some notes about the API.")
+    @GetMapping({"/{idnumber}"})
+    public ResponseEntity<User> getUserByIdNumber(@PathVariable("idnumber") Long idNumber){
+        return new ResponseEntity<User>(userService.getUserByIdNumber(idNumber), HttpStatus.OK);
+    }
 
-
-
-    //@ApiOperation(value = "get user by last name", notes = "These are some notes about the API.")
-    //@GetMapping({"/lastname/{lastname}"})
-    //public ResponseEntity<List<User>> getUserById(@PathVariable String lastname){
-     //   return new ResponseEntity<List<User>>(userService.getUsersByLastName(lastname), HttpStatus.OK);
-    //}
 
     @ApiOperation(value = "get user by Role", notes = "These are some notes about the API.")
     @GetMapping({"/role/{role}"})
@@ -90,7 +89,7 @@ public class UserController {
 
     @ApiOperation(value = "update the user by the idNumber", notes = "Please be carefill provide only the new data")
     @PutMapping({"/{idNumber}"})
-    public ResponseEntity <User> updateUser(@PathVariable int idNumber, @RequestBody User user) {
+    public ResponseEntity <User> updateUser(@PathVariable Long idNumber, @RequestBody User user) {
         return new ResponseEntity<User>(userService.updateUser(idNumber, user),
                 HttpStatus.OK);
     }

@@ -59,25 +59,6 @@ public class PurchaseController {
         return new ResponseEntity<Set<Purchase>>(purchases, HttpStatus.OK);
     }
 
-   /*
-    @ApiOperation(value = "get project by id number", notes = "These are some notes about the API.")
-    @GetMapping({"/{id}"})
-    public ResponseEntity<Purchase> getPurchaseById(@PathVariable Long id){
-        return new ResponseEntity<Purchase>(purchaseService.getPurchaseById(id), HttpStatus.OK);
-    }
-
-
-
-
-    @ApiOperation(value = "update the project by the id OF the project", notes = "Please be carefull provide only the new data")
-    @PutMapping({"/{id}"})
-    public ResponseEntity <Purchase> updateProject(@PathVariable Long id, @RequestBody Purchase project) {
-        return new ResponseEntity<Purchase>(projectService.updatePurchase(id, project),
-                HttpStatus.OK);
-    }
-  */
-
-
     @ApiOperation(value = "image", notes = "Please be carefull provide only the new data")
     @PostMapping({"/purchase/uploadimage/{id}"})
 

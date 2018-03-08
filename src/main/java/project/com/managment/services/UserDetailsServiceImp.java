@@ -10,7 +10,7 @@ package project.com.managment.services;
         import project.com.managment.domain.User;
         import project.com.managment.repositories.UserRepository;
 
-        import static project.com.managment.domain.Role.USER;
+
 
 
 public class UserDetailsServiceImp implements UserDetailsService {
@@ -24,9 +24,8 @@ public class UserDetailsServiceImp implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-    /*Here we are using dummy data, you need to load user data from
-     database or other third party application*/
-        User user =getUserByIdNumber(username);
+    Long userNameLong = Long.parseLong(username, 10);
+        User user =getUserByIdNumber(userNameLong);
         //user.g
         UserBuilder builder = null;
         if (user != null) {
@@ -39,9 +38,9 @@ public class UserDetailsServiceImp implements UserDetailsService {
 
         return builder.build();
     }
-    public User getUserByIdNumber(String username) {
-       // User foundUser = userRepository.findByIdNumber(username);
-        User foundUser = userRepository.getDistinctFirstByIdNumber(036913192);
+    public User getUserByIdNumber(Long username) {
+       User foundUser = userRepository.findByIdNumber(username);
+       // User foundUser = userRepository.getDistinctFirstByIdNumber(98L);
         return foundUser;
     }
 

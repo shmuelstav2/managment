@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/login/**", "/index").permitAll()
-                .antMatchers("/api/users/**").hasRole("USER")
+                .antMatchers("/api/users/**").hasRole("MAINMANAGER")
                 .and()
                 .httpBasic();
                 //.formLogin().loginPage("/login").failureUrl("/login-error");

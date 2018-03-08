@@ -12,7 +12,7 @@ import project.com.managment.services.ProjectServiceImpl;
 import java.lang.reflect.Array;
 
 import static project.com.managment.domain.Role.MAINMANAGER;
-import static project.com.managment.domain.Role.USER;
+
 
 /**
  * Created by jt on 9/24/17.
@@ -50,11 +50,11 @@ public class Bootstrap implements CommandLineRunner {
     private void loadUsers() {
         User user1 = new User();
         user1.setFirstName("Vendor 1");
-        user1.setRole(USER);
-        user1.setIdNumber("036913192");
+        user1.setRole(MAINMANAGER);
+        user1.setIdNumber(5675756756L);
         user1.setPassword("1234");
         user1.setLastName("swefew");
-        user1.setIdNumber("1321313");
+        user1.setIdNumber(1321313L);
         //user1.setRole();
         userRepository.save(user1);
 

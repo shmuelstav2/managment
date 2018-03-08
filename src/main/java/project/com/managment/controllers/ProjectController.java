@@ -17,12 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import project.com.managment.domain.*;
 import project.com.managment.services.ProjectService;
-import project.com.managment.services.UserService;
-import static java.lang.System.out;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import static java.lang.System.*;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -31,26 +25,17 @@ import java.nio.file.Paths;
 import java.util.*;
 
 import  java.io.*;
-import java.lang.Object.*;
-import io.swagger.annotations.Api;
-        import io.swagger.annotations.ApiOperation;
-        import org.json.JSONObject;
-        import org.springframework.data.jpa.domain.Specification;
-        import org.springframework.http.HttpStatus;
-        import org.springframework.http.ResponseEntity;
-        import org.springframework.stereotype.Controller;
-        import org.springframework.web.bind.annotation.GetMapping;
-        import org.springframework.web.bind.annotation.PathVariable;
-        import org.springframework.web.bind.annotation.PostMapping;
-        import org.springframework.web.bind.annotation.RequestMapping;
-        import org.springframework.http.ResponseEntity;
-        import org.springframework.stereotype.Controller;
-        import org.springframework.web.bind.annotation.*;
-        import project.com.managment.domain.User;
-        import project.com.managment.services.UserService;
-
-import javax.imageio.ImageIO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
+
+
+
 
 @Api(description = "manage all the projects data")
 @Controller
@@ -87,8 +72,6 @@ public class ProjectController {
     }
 
 
-
-
     @ApiOperation(value = "update the project by the id OF the project", notes = "Please be carefull provide only the new data")
     @PutMapping({"/{id}"})
     public ResponseEntity <Project> updateProject(@PathVariable Long id, @RequestBody Project project) {
@@ -105,7 +88,6 @@ public class ProjectController {
     }
 
     Path path = FileSystems.getDefault().getPath(".");
-    private String UPLOADED_FOLDER ="src\\main\\resources\\static\\";
     @ApiOperation(value = "image", notes = "Please be carefull provide only the new data")
     @PostMapping({"/uploadimage/{id}"})
 
@@ -120,9 +102,6 @@ public class ProjectController {
         try {
 
             saveUploadedFiles(Arrays.asList(uploadfile),id);
-
-
-
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -139,7 +118,6 @@ public class ProjectController {
             FileOutputStream fos = new FileOutputStream(convFile);
             fos.write(file.getBytes());
             fos.close();
-            //return convFile;
 
             if (file.isEmpty()) {
                 continue; //next pls
