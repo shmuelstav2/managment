@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-      return userRepository.findAll().stream().collect(Collectors.toList());
+        return userRepository.findAll().stream().collect(Collectors.toList());
     }
 
     @Override
@@ -31,8 +31,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createNewUser(User user) {
 
-            User savedUser = userRepository.save(user);
-           return savedUser;
+        User savedUser = userRepository.save(user);
+        return savedUser;
     }
 
     @Override
@@ -60,7 +60,6 @@ public class UserServiceImpl implements UserService {
 
     private User saveAndReturnUser(User user) {
         User savedUser = userRepository.save(user);
-
         return savedUser;
     }
 
