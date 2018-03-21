@@ -14,14 +14,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
+//@Data
 @Entity
 @Table(name = "projects",uniqueConstraints={@UniqueConstraint(columnNames = {"id"})})
 public class Project {
 
-
-    public Project() {
-    }
+    private Boolean active = false;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,6 +39,10 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private Set<Purchase> purchases = new HashSet<Purchase>(
             0);
+    @JsonManagedReference(value="project-movement")
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private Set<WorkDay> workDays = new HashSet<WorkDay>(
+            0);
     private String comment;
 
 
@@ -48,7 +50,7 @@ public class Project {
     private String imageLink;
     private int tripAhead;
     private int tripBack;
-    private Boolean active;
+
 
     public Boolean getActive() {
         return active;
@@ -98,8 +100,6 @@ public class Project {
         this.concats = concats;
     }
 
-
-
     public Set<Purchase> getPurchases() {
         return purchases;
     }
@@ -118,6 +118,17 @@ public class Project {
         concat.setProject(null);
     }
 
+    public void addWorkDay(WorkDay workDay) {
+        workDays.add(workDay);
+        workDay.setProject(this);
+    }
+
+    public void removePurchase(WorkDay workDay) {
+        workDays.remove(workDay);
+        workDay.setProject(null);
+    }
+
+
     public void addPurcase(Purchase purchase) {
         purchases.add(purchase);
         purchase.setProject(this);
@@ -127,6 +138,7 @@ public class Project {
         purchases.remove(purchase);
         purchase.setProject(null);
     }
+
     public String getComment() {
         return comment;
     }

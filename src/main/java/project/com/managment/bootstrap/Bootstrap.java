@@ -10,6 +10,7 @@ import project.com.managment.repositories.ProjectRepository;
 import project.com.managment.services.ProjectServiceImpl;
 
 import java.lang.reflect.Array;
+import java.time.LocalTime;
 
 import static project.com.managment.domain.Role.MAINMANAGER;
 
@@ -55,12 +56,9 @@ public class Bootstrap implements CommandLineRunner {
         user1.setPassword("1234");
         user1.setLastName("swefew");
         user1.setIdNumber(1321313L);
-        //user1.setRole();
+        user1.setPayDay(230);
+        user1.setAdditionHourPay(13);
         userRepository.save(user1);
-
-        //Vendor vendor2 = new Vendor();
-        //vendor2.setName("Vendor 2");
-        //vendorRepository.save(vendor2);
 
     }
 
@@ -76,8 +74,11 @@ public class Bootstrap implements CommandLineRunner {
         project1.addConcat(cn2);
         Purchase p1 = new Purchase();
         p1.setAmount(6);
+
         p1.setComment("rstttrg rtyg6 g  54t54 4g45g54g54");
         p1.setOperatorId("036913192");
+       // p1.
+       // p1.get
         project1.addPurcase(p1);
        // project1.setOwner(2);
         Location lc1 =new Location();
@@ -85,6 +86,13 @@ public class Bootstrap implements CommandLineRunner {
         lc1.setLongitude(5476547);
         address1.setLocation(lc1);
         project1.setAddress(address1);
+
+        /*
+             Add workDays to project
+         */
+        WorkDay wd1 = new WorkDay();
+        wd1.setCheckIn( LocalTime.now());
+        project1.addWorkDay(wd1);
         projectRepository.save(project1);
      //   System.out.print(projectService.getAllProjects());
 
