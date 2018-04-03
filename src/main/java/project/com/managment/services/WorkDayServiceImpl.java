@@ -7,11 +7,11 @@ import project.com.managment.repositories.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.Date;
 import java.util.HashSet;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -31,12 +31,14 @@ public class WorkDayServiceImpl implements WorkDayService {
 
 
     @Override
-    public Set<WorkDay> getAllWorkDays() {
-        Set<WorkDay> workDaysSet = new HashSet<>();
-        workDayRepository.findAll().iterator().forEachRemaining(workDaysSet::add);
-        return workDaysSet;
-    }
+    public List<WorkDay> getAllWorkDays() {
 
+        //Set<WorkDay>
+                List workDayList =  workDayRepository.findAll();
+               Set<WorkDay> workDaysSet = new HashSet<>();
+                //.iterator().forEachRemaining(workDaysSet::add);
+        return workDayList;
+    }
 
 
     @Override
@@ -78,8 +80,9 @@ public class WorkDayServiceImpl implements WorkDayService {
 
     @Override
     public WorkDay updateWorkDayDate(Long id, Date date) {
-        System.out.print(date);
-        return null;
+        WorkDay foundWorkDay = workDayRepository.findOne(id);
+        foundWorkDay.setDate(getLocalDateFromDate(date));
+        return saveAndReturnWorkDay(foundWorkDay);
     }
 
     @Override
@@ -106,7 +109,15 @@ public class WorkDayServiceImpl implements WorkDayService {
         return saveAndReturnWorkDay(foundWorkDay);
     }
 
+    @Override
+    public WorkDay DeleteWorkDayId (Long id){
+        workDayRepository.delete(id);
+        return null;
+    }
 
+    public static LocalDate getLocalDateFromDate(Date date){
+        return LocalDate.from(Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()));
+    }
 
     private WorkDay saveAndReturnWorkDay (WorkDay workDay) {
         WorkDay savedWorkDay = workDayRepository.save(workDay);

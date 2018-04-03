@@ -49,10 +49,10 @@ public class WorkDayController {
     }
 
     @ApiOperation(value = "This will get a list of all the workdays.", notes = "These are some notes about the API.")
-    @GetMapping
-    public ResponseEntity<Set<WorkDay>> getallWorkDays(){
-        Set<WorkDay> workDays = workDayService.getAllWorkDays();
-        return new ResponseEntity<Set<WorkDay>>(workDays, HttpStatus.OK);
+    @GetMapping("/allworkdays")
+    public ResponseEntity<List<WorkDay>> getallWorkDays(){
+        List <WorkDay> workDays = workDayService.getAllWorkDays();
+        return new ResponseEntity<List<WorkDay>>(workDays, HttpStatus.OK);
     }
 
     @ApiOperation(value = "create new workday", notes = "These are some notes about the API.")
@@ -84,6 +84,15 @@ public class WorkDayController {
                 HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "delete workday with workday id", notes = "These are some notes about the API.")
+    @DeleteMapping("/deleteworkdaycheckout/{workdayid}")
+    public ResponseEntity<WorkDay> delete(@PathVariable("workdayid") Long workdayid){
+        return new ResponseEntity<WorkDay>(workDayService.DeleteWorkDayId(workdayid),
+                HttpStatus.CREATED);
+    }
+
+
+
     @ApiOperation(value = "update workday check out with workday object and workday id", notes = "These are some notes about the API.")
     @PostMapping("/updateworkdaycheckout/{workdayid}")
     public ResponseEntity<WorkDay> updateWorkDayCheckOut(@PathVariable("workdayid") Long workdayid,@RequestBody Time time){
@@ -100,9 +109,20 @@ public class WorkDayController {
 
     @ApiOperation(value = "update workday with date and workday id", notes = "These are some notes about the API.")
     @PostMapping("/updateworkdaydate/{workdayid}")
-    public ResponseEntity<WorkDay> updateWorkDayCheckIn(@PathVariable("workdayid") Long workdayid,@RequestBody Date date){
-        return new ResponseEntity<WorkDay>(workDayService.updateWorkDayDate(workdayid,date),
-                HttpStatus.CREATED);
+    public ResponseEntity<WorkDay> updateWorkDayCheckIn(@PathVariable("workdayid") Long workdayid,@RequestBody String dateString){
+        JSONObject jsonObject = new JSONObject(dateString);
+        if(jsonObject.has("year")) {
+            int year = jsonObject.getInt("year");
+            int month = jsonObject.getInt("month");
+            int day = jsonObject.getInt("date");
+            Date date = new Date(year-1900,month,day);
+            return new ResponseEntity<WorkDay>(workDayService.updateWorkDayDate(workdayid,date),
+                    HttpStatus.CREATED);
+        }
+        else{
+            return new ResponseEntity(new EmptyJsonResponse(), HttpStatus.NOT_FOUND);
+        }
+
     }
 
 

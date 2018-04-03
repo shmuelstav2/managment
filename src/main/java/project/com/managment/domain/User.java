@@ -1,5 +1,6 @@
 package project.com.managment.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,7 +37,6 @@ public class User {
     private String lastName;
     @Enumerated(EnumType.STRING)
     private Role role;
-
 
     @JsonManagedReference(value="user-movement")
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

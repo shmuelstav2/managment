@@ -39,9 +39,15 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private Set<Purchase> purchases = new HashSet<Purchase>(
             0);
+
     @JsonManagedReference(value="project-movement")
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private Set<WorkDay> workDays = new HashSet<WorkDay>(
+            0);
+
+    @JsonManagedReference(value="project-payments")
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private Set<Payments> payments = new HashSet<Payments>(
             0);
     private String comment;
 

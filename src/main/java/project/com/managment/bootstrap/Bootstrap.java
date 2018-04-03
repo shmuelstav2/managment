@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
         import org.springframework.boot.CommandLineRunner;
         import org.springframework.stereotype.Component;
+import project.com.managment.repositories.PaymentsRepository;
 import project.com.managment.repositories.UserRepository;
 import project.com.managment.repositories.ProjectRepository;
 import project.com.managment.services.ProjectServiceImpl;
@@ -22,11 +23,12 @@ import static project.com.managment.domain.Role.MAINMANAGER;
 public class Bootstrap implements CommandLineRunner {
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
+    private final PaymentsRepository paymentsRepository;
    // private final ProjectServiceImpl projectService;
     //private final CustomerRepository customerRepository;
     /*private final VendorRepository vendorRepository;
   */
-    public Bootstrap(UserRepository userRepository,ProjectRepository projectRepository
+    public Bootstrap(UserRepository userRepository,ProjectRepository projectRepository, PaymentsRepository paymentsRepository
             //,ProjectServiceImpl projectService
     /*, CustomerRepository customerRepository, VendorRepository vendorRepository*/
     )
@@ -34,6 +36,7 @@ public class Bootstrap implements CommandLineRunner {
 
         this.userRepository = userRepository;
         this.projectRepository =projectRepository;
+        this.paymentsRepository = paymentsRepository;
       //  this.projectService = projectService;
      /*   this.customerRepository = customerRepository;
         this.vendorRepository = vendorRepository;
@@ -72,6 +75,7 @@ public class Bootstrap implements CommandLineRunner {
         cn2.setFirstName("ihuikjlh");
         project1.addConcat(cn1);
         project1.addConcat(cn2);
+        project1.setActive(true);
         Purchase p1 = new Purchase();
         p1.setAmount(6);
 
@@ -87,6 +91,21 @@ public class Bootstrap implements CommandLineRunner {
         address1.setLocation(lc1);
         project1.setAddress(address1);
 
+
+
+        Project project2 = new Project();
+        Address address2 = new Address();
+        address1.setFullAdress("lod");
+        Concat cn3 = new Concat();
+        cn2.setFirstName("ihuih");
+        Concat cn4 = new Concat();
+        cn3.setFirstName("ihuikjlh");
+        project2.addConcat(cn3);
+        project2.addConcat(cn4);
+        project2.setActive(true);
+        Purchase p2 = new Purchase();
+        project2.setAddress(address1);
+        p2.setAmount(6);
         /*
              Add workDays to project
          */
@@ -94,6 +113,19 @@ public class Bootstrap implements CommandLineRunner {
         wd1.setCheckIn( LocalTime.now());
         project1.addWorkDay(wd1);
         projectRepository.save(project1);
+        projectRepository.save(project2);
+
+        Payments pay1 = new Payments();
+        pay1.setPayer("retre");
+        pay1.setComment("number 2");
+        pay1.setProject(project1);
+        Payments pay2 = new Payments();
+        pay2.setPayer("Dan");
+        pay2.setComment("number 2");
+        pay2.setProject(project1);
+        paymentsRepository.save(pay1);
+        paymentsRepository.save(pay2);
+
      //   System.out.print(projectService.getAllProjects());
 
     }
