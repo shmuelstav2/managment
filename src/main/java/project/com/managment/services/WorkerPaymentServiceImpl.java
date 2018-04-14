@@ -58,4 +58,20 @@ public class WorkerPaymentServiceImpl implements WorkerPaymentService {
         return workerPaymentRepository.save(workerPayment);
     }
 
+    public WorkerPayment  getWorkerPaymentId(Long workerPaymentid){
+        return workerPaymentRepository.findOne(workerPaymentid);
+    }
+    public  WorkerPayment DeleteWorkerPayment(Long workerpaymentid){
+        workerPaymentRepository.delete(workerpaymentid);
+        return null;
+    }
+
+    public  WorkerPayment updateWorkerPayment(Long workerpaymentid, WorkerPayment workerPayment){
+        WorkerPayment current = workerPaymentRepository.findOne(workerpaymentid);
+        workerPayment.setId(current.getId());
+        return workerPayment;
+    }
+
+
+
 }

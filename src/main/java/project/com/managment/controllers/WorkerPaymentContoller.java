@@ -77,93 +77,36 @@ public class WorkerPaymentContoller {
         return new ResponseEntity<WorkerPayment>(workerPaymentService.createNewWorkerPayment(workerid,userid,workerPayment),
                 HttpStatus.CREATED);
     }
- /*
-    @ApiOperation(value = "add new check in", notes = "These are some notes about the API.")
-    @PostMapping("/addcheckin/{projectid}/{userid}")
-    public ResponseEntity<WorkDay> addCheckIn(@PathVariable("projectid") Long projectid,@PathVariable("userid") Long userid){
-        return new ResponseEntity<WorkDay>(workDayService.addCheckIn(projectid,userid),
-                HttpStatus.CREATED);
-    }
 
-    @ApiOperation(value = "add new checkout", notes = "These are some notes about the API.")
-    @PostMapping("/addcheckout/{workdayid}")
-    public ResponseEntity<WorkDay> addCheckIn(@PathVariable("workdayid") Long workdayid){
-        return new ResponseEntity<WorkDay>(workDayService.addCheckOut(workdayid),
-                HttpStatus.CREATED);
-    }
-
-
-    @ApiOperation(value = "get specific workday with workday id", notes = "These are some notes about the API.")
-    @GetMapping("/getworkday/{workdayid}")
-    public ResponseEntity<WorkDay> getWorkDay(@PathVariable("workdayid") Long workdayid){
-        return new ResponseEntity<WorkDay>(workDayService.getWorkDayId(workdayid),
-                HttpStatus.CREATED);
-    }
-
-    @ApiOperation(value = "delete workday with workday id", notes = "These are some notes about the API.")
-    @DeleteMapping("/deleteworkdaycheckout/{workdayid}")
-    public ResponseEntity<WorkDay> delete(@PathVariable("workdayid") Long workdayid){
-        return new ResponseEntity<WorkDay>(workDayService.DeleteWorkDayId(workdayid),
+    @ApiOperation(value = "get specific workerpayment with workerpayment id", notes = "These are some notes about the API.")
+    @GetMapping("/getworkerpayment/{workerpayment}")
+    public ResponseEntity<WorkerPayment> getWorkerPayment(@PathVariable("workerpayment") Long workerPaymentid){
+        return new ResponseEntity<WorkerPayment>(workerPaymentService.getWorkerPaymentId(workerPaymentid),
                 HttpStatus.CREATED);
     }
 
 
 
-    @ApiOperation(value = "update workday check out with workday object and workday id", notes = "These are some notes about the API.")
-    @PostMapping("/updateworkdaycheckout/{workdayid}")
-    public ResponseEntity<WorkDay> updateWorkDayCheckOut(@PathVariable("workdayid") Long workdayid,@RequestBody Time time){
-        return new ResponseEntity<WorkDay>(workDayService.updateWorkDayCheckOut(workdayid,time),
+    @ApiOperation(value = "delete workerpayment with workerpayment id", notes = "These are some notes about the API.")
+    @DeleteMapping("/deleteworkerpayment/{workerpayment}")
+    public ResponseEntity<WorkerPayment> delete(@PathVariable("workerpayment") Long workerpaymentid){
+        return new ResponseEntity<WorkerPayment>(workerPaymentService.DeleteWorkerPayment(workerpaymentid),
                 HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "update workday with workday object and workday id", notes = "These are some notes about the API.")
-    @PostMapping("/updateworkdaycheckin/{workdayid}")
-    public ResponseEntity<WorkDay> updateWorkDayCheckIn(@PathVariable("workdayid") Long workdayid,@RequestBody Time time){
-        return new ResponseEntity<WorkDay>(workDayService.updateWorkDayCheckIn(workdayid,time),
-                HttpStatus.CREATED);
-    }
 
-    @ApiOperation(value = "update workday with date and workday id", notes = "These are some notes about the API.")
-    @PostMapping("/updateworkdaydate/{workdayid}")
-    public ResponseEntity<WorkDay> updateWorkDayCheckIn(@PathVariable("workdayid") Long workdayid,@RequestBody String dateString){
-        JSONObject jsonObject = new JSONObject(dateString);
-        if(jsonObject.has("year")) {
-            int year = jsonObject.getInt("year");
-            int month = jsonObject.getInt("month");
-            int day = jsonObject.getInt("date");
-            Date date = new Date(year-1900,month,day);
-            return new ResponseEntity<WorkDay>(workDayService.updateWorkDayDate(workdayid,date),
-                    HttpStatus.CREATED);
+    @ApiOperation(value = "update workerpayment with workerpayment object and workerpayment id", notes = "These are some notes about the API.")
+    @PostMapping("/updateworkerpayment/{workerpaymentid}")
+    public ResponseEntity <WorkerPayment> updatePayments(@PathVariable Long workerpaymentid, @RequestBody WorkerPayment workerPayment) {
+        WorkerPayment workerPaymentNew =workerPaymentService.updateWorkerPayment(workerpaymentid,workerPayment);
+        if(workerPaymentNew == null){
+            return new ResponseEntity<WorkerPayment>(workerPaymentNew,
+                    HttpStatus.FORBIDDEN);
         }
         else{
-            return new ResponseEntity(new EmptyJsonResponse(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<WorkerPayment>(workerPaymentNew,
+                    HttpStatus.OK);
         }
-
     }
-
-
-    @JsonSerialize
-    public class EmptyJsonResponse { }
-
-    @ApiOperation(value = "get workday with id", notes = "These are some notes about the API.")
-    @GetMapping("/getWorkDay/{userid}")
-    public ResponseEntity<WorkDay> getWorkDay(@PathVariable("userid") Long userid ,@RequestParam("date")  String fromDate ){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "dd-MM-yyyy" );
-
-        try {
-
-            LocalDate newdate =LocalDate.parse(fromDate, formatter);;
-            System.out.print("this is:  "+newdate+"       ");
-            return new ResponseEntity<WorkDay>(workDayService.getWorkDay(userid,newdate),
-                    HttpStatus.CREATED);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //look for workdays
-        return new ResponseEntity(new EmptyJsonResponse(), HttpStatus.OK);
-    }
-
-    */
-}
+  }
 
