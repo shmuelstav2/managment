@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +18,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "users",uniqueConstraints={@UniqueConstraint(columnNames = {"idNumber"})})
 public class User {
-    public User( String firstName, String lastName, Role role, Boolean active, Long idNumber, Date createdDate, int payDay, int additionHourPay) {
+    public User( String firstName, String lastName, Role role, Boolean active, BigInteger idNumber, Date createdDate, int payDay, int additionHourPay) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -43,9 +44,20 @@ public class User {
     private Set<WorkDay> workDays = new HashSet<WorkDay>(
             0);
 
+
+    @JsonManagedReference(value="worker-payments")
+    @OneToMany(mappedBy = "worker", cascade = CascadeType.ALL)
+    private Set<WorkerPayment> workerPayments = new HashSet<WorkerPayment>(
+            0);
+
+    @JsonManagedReference(value="manager-payments")
+    @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL)
+    private Set<WorkerPayment> managerPayments = new HashSet<WorkerPayment>(
+            0);
+
     private Boolean active;
     @Column(nullable = false)
-    private Long idNumber;
+    private BigInteger idNumber;
     private Date createdDate;
     private int payDay;
     private int additionHourPay;

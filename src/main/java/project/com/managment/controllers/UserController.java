@@ -17,6 +17,7 @@ import project.com.managment.domain.Role;
 import project.com.managment.domain.User;
 import project.com.managment.services.UserService;
 
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class UserController {
 */
     @ApiOperation(value = "get user by id of identication", notes = "These are some notes about the API.")
     @GetMapping({"/{idnumber}"})
-    public ResponseEntity<User> getUserByIdNumber(@PathVariable("idnumber") Long idNumber){
+    public ResponseEntity<User> getUserByIdNumber(@PathVariable("idnumber") BigInteger idNumber){
         return new ResponseEntity<User>(userService.getUserByIdNumber(idNumber), HttpStatus.OK);
     }
 
@@ -89,7 +90,7 @@ public class UserController {
 
     @ApiOperation(value = "update the user by the idNumber", notes = "Please be carefill provide only the new data")
     @PutMapping({"/{idNumber}"})
-    public ResponseEntity <User> updateUser(@PathVariable Long idNumber, @RequestBody User user) {
+    public ResponseEntity <User> updateUser(@PathVariable BigInteger idNumber, @RequestBody User user) {
         return new ResponseEntity<User>(userService.updateUser(idNumber, user),
                 HttpStatus.OK);
     }

@@ -11,8 +11,10 @@ import project.com.managment.repositories.ProjectRepository;
 import project.com.managment.services.ProjectServiceImpl;
 
 import java.lang.reflect.Array;
+import java.math.BigInteger;
 import java.time.LocalTime;
 
+import static project.com.managment.domain.Role.EMPLOYEE;
 import static project.com.managment.domain.Role.MAINMANAGER;
 
 
@@ -55,13 +57,20 @@ public class Bootstrap implements CommandLineRunner {
         User user1 = new User();
         user1.setFirstName("Vendor 1");
         user1.setRole(MAINMANAGER);
-        user1.setIdNumber(5675756756L);
+        user1.setIdNumber(BigInteger.valueOf(675756756));
         user1.setPassword("1234");
         user1.setLastName("swefew");
-        user1.setIdNumber(1321313L);
+        user1.setIdNumber(BigInteger.valueOf(1321313));
         user1.setPayDay(230);
         user1.setAdditionHourPay(13);
         userRepository.save(user1);
+
+        User user3 = new User();
+        user3.setFirstName("sam");
+        user3.setRole(EMPLOYEE);
+        user3.setIdNumber(BigInteger.valueOf(2342342));
+        user3.setPassword("1234");
+        userRepository.save(user3);
 
     }
 

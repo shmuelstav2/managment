@@ -6,6 +6,7 @@ import project.com.managment.domain.User;
 import project.com.managment.repositories.UserRepository;
 
 import javax.validation.ConstraintViolationException;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
 @Service
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByIdNumber(Long idNumber) {
+    public User getUserByIdNumber(BigInteger idNumber) {
         User foundUser = userRepository.getDistinctFirstByIdNumber(idNumber);
         return foundUser;
     }
@@ -42,7 +43,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(Long  idNumber, User user) {
+    public User updateUser(BigInteger  idNumber, User user) {
         User foundUser = userRepository.getDistinctFirstByIdNumber(idNumber);
         user.setId(foundUser.getId());
         return saveAndReturnUser(user);

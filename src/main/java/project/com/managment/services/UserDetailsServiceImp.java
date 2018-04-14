@@ -10,7 +10,7 @@ package project.com.managment.services;
         import project.com.managment.domain.User;
         import project.com.managment.repositories.UserRepository;
 
-
+        import java.math.BigInteger;
 
 
 public class UserDetailsServiceImp implements UserDetailsService {
@@ -24,7 +24,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-    Long userNameLong = Long.parseLong(username, 10);
+    BigInteger userNameLong = BigInteger.valueOf(Long.parseLong(username, 10));
         User user =getUserByIdNumber(userNameLong);
         //user.g
         UserBuilder builder = null;
@@ -38,23 +38,9 @@ public class UserDetailsServiceImp implements UserDetailsService {
 
         return builder.build();
     }
-    public User getUserByIdNumber(Long username) {
+    public User getUserByIdNumber(BigInteger username) {
        User foundUser = userRepository.findByIdNumber(username);
        // User foundUser = userRepository.getDistinctFirstByIdNumber(98L);
         return foundUser;
     }
-
-    //private User findUserbyUername(String username) {
-        /*if (
-                username.equalsIgnoreCase("admin")) {
-    */
-     //       User us1 = userRepository.findByIdNumber(username);
-      //      return us1;
-            /*
-        } else {
-            return null;
-        }*/
-
-    //}
-
 }
