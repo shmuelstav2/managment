@@ -10,7 +10,10 @@ import project.com.managment.domain.WorkerPayment;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 public interface WorkerPaymentRepository  extends JpaRepository<WorkerPayment, Long> {
-
+  // List <WorkerPayment> findAllByWorker(Long id);
+   List <WorkerPayment> findAllByWorkerId (Long id);
+   List <WorkerPayment> findAllByManagerId (Long id);
 }

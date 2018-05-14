@@ -67,9 +67,26 @@ public class WorkerPaymentContoller {
     public ResponseEntity<List<WorkerPayment>> getallWorkerPayments(){
         List <WorkerPayment> workerPayments = workerPaymentService.getAllWorkerPayments();
         return new ResponseEntity<List<WorkerPayment>>(workerPayments, HttpStatus.OK);
+
     }
 
 
+    @ApiOperation(value = "get specific workerpayment with workerpayment id", notes = "These are some notes about the API.")
+    @GetMapping("/workerpayments/employee/{employee}")
+
+
+   public ResponseEntity<List<WorkerPayment>> getallWorkerPaymentsEmployee(@PathVariable("employee") Long employeeId){
+        List <WorkerPayment> workerPayments = workerPaymentService.getAllWorkerPaymentsEmployee(employeeId);
+        return new ResponseEntity<List<WorkerPayment>>(workerPayments, HttpStatus.OK);
+    }
+
+
+    @ApiOperation(value = "This will get a list of all the worker payments of specicfic manager", notes = "These are some notes about the API.")
+    @GetMapping("/workerpayments/manager/{manager}")
+    public ResponseEntity<List<WorkerPayment>> getallWorkerPaymentsManager(@PathVariable("manager") Long managerId){
+        List <WorkerPayment> workerPayments = workerPaymentService.getAllWorkerPaymentsManager(managerId);
+        return new ResponseEntity<List<WorkerPayment>>(workerPayments, HttpStatus.OK);
+    }
 
     @ApiOperation(value = "create new WorkerPayment", notes = "These are some notes about the API.")
     @PostMapping("/{workerid}/{userid}")

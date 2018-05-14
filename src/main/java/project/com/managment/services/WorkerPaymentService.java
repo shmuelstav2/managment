@@ -24,6 +24,8 @@ import project.com.managment.domain.Project;
 
 public interface WorkerPaymentService {
     public List <WorkerPayment> getAllWorkerPayments();
+    public  List <WorkerPayment> getAllWorkerPaymentsEmployee(Long employeeId);
+    public  List <WorkerPayment> getAllWorkerPaymentsManager(Long managerId);
     public WorkerPayment createNewWorkerPayment( Long workerid,Long userid,WorkerPayment workerPayment);
     public WorkerPayment  getWorkerPaymentId(Long workerPaymentid);
     public  WorkerPayment DeleteWorkerPayment(Long workerpaymentid);

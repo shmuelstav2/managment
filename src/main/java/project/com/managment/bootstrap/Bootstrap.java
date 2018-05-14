@@ -65,9 +65,21 @@ public class Bootstrap implements CommandLineRunner {
         user1.setAdditionHourPay(13);
         userRepository.save(user1);
 
+        User user2 = new User();
+        user2.setFirstName("Meir");
+        user2.setRole(EMPLOYEE);
+        user2.setIdNumber(BigInteger.valueOf(675756656));
+        user2.setPassword("1234");
+        user2.setLastName("stav");
+        user2.setIdNumber(BigInteger.valueOf(1321413));
+        user2.setPayDay(230);
+        user2.setAdditionHourPay(13);
+        userRepository.save(user2);
+
+
         User user3 = new User();
         user3.setFirstName("sam");
-        user3.setRole(EMPLOYEE);
+        user3.setRole(MAINMANAGER);
         user3.setIdNumber(BigInteger.valueOf(2342342));
         user3.setPassword("1234");
         userRepository.save(user3);

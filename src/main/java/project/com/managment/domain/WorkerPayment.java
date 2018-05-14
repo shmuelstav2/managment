@@ -34,5 +34,4 @@ public class WorkerPayment  {
     @JoinColumn(name = "worker_id")
     private User worker;
 
-
 }

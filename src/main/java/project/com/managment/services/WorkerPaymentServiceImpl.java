@@ -50,6 +50,16 @@ public class WorkerPaymentServiceImpl implements WorkerPaymentService {
         return workDayList;
     }
 
+
+    public  List <WorkerPayment> getAllWorkerPaymentsEmployee(Long employeeId){
+        List <WorkerPayment> workDayList =  workerPaymentRepository.findAllByWorkerId(employeeId);
+        return workDayList;
+    }
+    public  List <WorkerPayment> getAllWorkerPaymentsManager(Long managerId){
+        List <WorkerPayment> workDayList =  workerPaymentRepository.findAllByManagerId(managerId);
+        return workDayList;
+    }
+
     public WorkerPayment createNewWorkerPayment( Long workerid,Long userid,WorkerPayment workerPayment){
         User currentUser = userService.getUserById(workerid);
         User currentManager = userService.getUserById(userid);
