@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import project.com.managment.domain.*;
 import project.com.managment.repositories.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 
         import java.util.Set;
@@ -54,6 +56,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     public Purchase createNewPurchase(Long id,Purchase purchase) {
         Project current = projectService.getProjectById(id);
         purchase.setProject(current);
+        purchase.setDate(LocalDate.now());
         Purchase savedPurchase = purchaseRepository.save(purchase);
         return savedPurchase;
     }
@@ -61,6 +64,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     public Purchase updatePurchase(Long purchaseid,Purchase purchase){
        Purchase current = purchaseRepository.findOne(purchaseid);
        purchase.setId(current.getId());
+        purchase.setDate(LocalDate.now());
        return (purchaseRepository.save(purchase));
        }
 

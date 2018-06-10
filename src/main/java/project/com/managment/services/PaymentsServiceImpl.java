@@ -7,6 +7,7 @@ import project.com.managment.repositories.ProjectRepository;
 import project.com.managment.repositories.PurchaseRepository;
 import project.com.managment.repositories.UserRepository;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -35,6 +36,7 @@ public class PaymentsServiceImpl implements PaymentsService{
         Project current = projectService.getProjectById(projectid);
         if(current!=null && current.getActive()==true){
             payments.setProject(current);
+            payments.setDate(LocalDate.now());
             Payments savedPayments = paymentsRepository.save(payments);
             return savedPayments;
         }
@@ -57,6 +59,7 @@ public class PaymentsServiceImpl implements PaymentsService{
             payments.setProject(project);
             Payments foundPayment = paymentsRepository.findOne(id);
             payments.setId(foundPayment.getId());
+            payments.setDate(LocalDate.now());
             return (paymentsRepository.save(payments));
         }
 

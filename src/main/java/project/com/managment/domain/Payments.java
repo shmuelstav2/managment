@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -34,7 +35,7 @@ public class Payments {
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
     private String comment;
-
+    private LocalDate date;
     @JsonBackReference(value="project-payments")
     @ManyToOne
     @JoinColumn(name = "project_id")

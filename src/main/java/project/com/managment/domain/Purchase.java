@@ -8,7 +8,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
         import javax.persistence.*;
         import java.awt.*;
-        import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
         import org.hibernate.annotations.Fetch;
         import org.hibernate.annotations.FetchMode;
@@ -32,6 +33,7 @@ public class Purchase {
     private String operatorId;
     private  String description;
     private int  amount;
+    private LocalDate date;
     @Enumerated(EnumType.STRING)
     private Payment payment;
     @Enumerated(EnumType.STRING)
