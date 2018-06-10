@@ -65,6 +65,19 @@ public class PurchaseController {
         return new ResponseEntity<Purchase>(purchaseService.createNewPurchase(projectid,purchase),
                 HttpStatus.CREATED);
     }
+    @ApiOperation(value = "update purchase", notes = "These are some notes about the API.")
+    @PostMapping("/update/{purchaseid}")
+    public ResponseEntity<Purchase> updatePurchase(@PathVariable("purchaseid") Long purchaseid,@RequestBody Purchase purchase){
+        return new ResponseEntity<Purchase>(purchaseService.updatePurchase(purchaseid,purchase),
+                HttpStatus.CREATED);
+    }
+
+    @ApiOperation(value = "get purchase", notes = "These are some notes about the API.")
+    @GetMapping("/get/{purchaseid}")
+    public ResponseEntity<Purchase> updatePurchase(@PathVariable("purchaseid") Long purchaseid){
+        return new ResponseEntity<Purchase>(purchaseService.getPurchase(purchaseid),
+                HttpStatus.CREATED);
+    }
 
 
     @ApiOperation(value = "image", notes = "Please be carefull provide only the new data")

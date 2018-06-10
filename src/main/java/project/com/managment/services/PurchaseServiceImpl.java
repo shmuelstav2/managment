@@ -58,6 +58,17 @@ public class PurchaseServiceImpl implements PurchaseService {
         return savedPurchase;
     }
 
+    public Purchase updatePurchase(Long purchaseid,Purchase purchase){
+       Purchase current = purchaseRepository.findOne(purchaseid);
+       purchase.setId(current.getId());
+       return (purchaseRepository.save(purchase));
+       }
+
+    public Purchase getPurchase(Long purchaseid){
+        return (purchaseRepository.findOne(purchaseid));
+    }
+
+
 
     @Override
     public Purchase updatePurchaseImage(Long id, String imageLink) {
