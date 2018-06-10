@@ -15,7 +15,8 @@ public interface PurchaseService {
 
     public Set<Purchase> getAllPurchases();
     public Purchase updatePurchaseImage(Long id, String imageLink) ;
-    public Purchase createNewPurchase(Purchase purchase);
+    public Purchase createNewPurchase(Long id,Purchase purchase);
+
     /*
     Set<Project> getAllProjects();
 

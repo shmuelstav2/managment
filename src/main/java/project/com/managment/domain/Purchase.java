@@ -34,6 +34,8 @@ public class Purchase {
     private int  amount;
     @Enumerated(EnumType.STRING)
     private Payment payment;
+    @Enumerated(EnumType.STRING)
+    private PaymentDetination paymentDetination;
     private int invoiceNum;
     private String  imageLink;
     private String comment;

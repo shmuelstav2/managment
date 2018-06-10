@@ -31,9 +31,10 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 
     private PurchaseRepository purchaseRepository;
-
-    public PurchaseServiceImpl( PurchaseRepository purchaseRepository) {
+    private ProjectService projectService;
+    public PurchaseServiceImpl( PurchaseRepository purchaseRepository,ProjectService projectService) {
         this.purchaseRepository= purchaseRepository;
+        this.projectService = projectService;
     }
 
    // @Override
@@ -50,11 +51,13 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     //@Override
-    public Purchase createNewPurchase(Purchase purchase) {
-
+    public Purchase createNewPurchase(Long id,Purchase purchase) {
+        Project current = projectService.getProjectById(id);
+        purchase.setProject(current);
         Purchase savedPurchase = purchaseRepository.save(purchase);
         return savedPurchase;
     }
+
 
     @Override
     public Purchase updatePurchaseImage(Long id, String imageLink) {
