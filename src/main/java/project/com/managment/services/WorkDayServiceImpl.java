@@ -66,6 +66,7 @@ public class WorkDayServiceImpl implements WorkDayService {
         WorkDay newWorkDay = workDayRepository.findOne(workdayid);
         newWorkDay.setCheckOut(LocalTime.now().plusMinutes(-5));
         newWorkDay.calcDailySalary(newWorkDay.getCheckOut());
+
         WorkDay savedWorkDay = workDayRepository.save(newWorkDay);
         return savedWorkDay;
     }

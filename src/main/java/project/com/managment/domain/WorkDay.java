@@ -51,6 +51,7 @@ public class WorkDay {
     private String comment;
     private LocalTime checkIn;
     private LocalTime  checkOut;
+    private double total_time;
     private double totalDailyAmount;
   /*
     projectId Project
@@ -61,6 +62,7 @@ public class WorkDay {
          checkOut = checkOutTime;
      }
      Long minutes = getPeriod(checkIn,checkOut);
+     this.setTotal_time(minutes/60);
      if (minutes>DAYTIME){
          salary = salary + this.getUser().getPayDay();
          minutes = minutes -270;
