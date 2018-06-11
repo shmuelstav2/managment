@@ -18,7 +18,7 @@ public interface WorkDayService {
     public WorkDay DeleteWorkDayId (Long id);
     public  WorkDay  updateWorkDayDate (Long id, Date date) ;
     public  WorkDay getWorkDayId (Long workdayid);
-    public WorkDay getWorkDay(Long userid ,  LocalDate date);
+    public List <WorkDay> getWorkDay(Long userid);
     public List<WorkDay> getAllWorkDays();
     public  WorkDay   updateWorkDayCheckIn (Long id, Time time) ;
     public  WorkDay   updateWorkDayCheckOut (Long id, Time time) ;

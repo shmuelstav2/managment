@@ -72,10 +72,9 @@ public class WorkDayServiceImpl implements WorkDayService {
     }
 
     @Override
-    public WorkDay getWorkDay(Long userid,  LocalDate date) {
-        System.out.print(date);
+    public List <WorkDay> getWorkDay(Long userid) {
         User user =userService.getUserById(userid);
-        WorkDay newWorkDay = workDayRepository.getDistinctByDateIsLikeAndUser(date,user);
+        List <WorkDay> newWorkDay = workDayRepository.findAllByUser(user);
         return newWorkDay;
     }
 

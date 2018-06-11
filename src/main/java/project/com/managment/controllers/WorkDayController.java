@@ -131,6 +131,13 @@ public class WorkDayController {
 
     @ApiOperation(value = "get workday with id", notes = "These are some notes about the API.")
     @GetMapping("/getWorkDay/{userid}")
+    public ResponseEntity <List <WorkDay>> getWorkDayByUser(@PathVariable("userid") Long userid ){
+         return new ResponseEntity<List<WorkDay>>(workDayService.getWorkDay(userid),
+                    HttpStatus.OK);
+    }
+
+  /*  @ApiOperation(value = "get workday with id", notes = "These are some notes about the API.")
+    @GetMapping("/getWorkDay/{userid}")
     public ResponseEntity<WorkDay> getWorkDay(@PathVariable("userid") Long userid ,@RequestParam("date")  String fromDate ){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "dd-MM-yyyy" );
 
@@ -146,6 +153,6 @@ public class WorkDayController {
         }
         //look for workdays
         return new ResponseEntity(new EmptyJsonResponse(), HttpStatus.OK);
-    }
+    }*/
 }
 
