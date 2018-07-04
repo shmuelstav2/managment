@@ -1,3 +1,9 @@
+
+/******************************
+ *           Project table Class
+ *******************************/
+
+
 package project.com.managment.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -159,13 +165,6 @@ public class Project {
     public void setImageLink(String imageLink) {
         this.imageLink = imageLink;
     }
-   /* public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }*/
 
     public int getTripAhead() {
         return tripAhead;
@@ -185,7 +184,6 @@ public class Project {
 
     @Override
     public String toString() {
-        return "Project [id=" + id + ", name=" + projectName + ", concats=" + concats
-                + "]";
+        return "Project [id=" + id + ", name=" + projectName + ", concats=" + concats + "]";
     }
 }

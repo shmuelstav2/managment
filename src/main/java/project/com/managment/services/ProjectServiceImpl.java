@@ -22,17 +22,13 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    //public Set<Project> getAllProjects() {
-     //   return projectRepository.findAll().stream().collect(Collectors.toList());
-    //}
-
-    public Set<Project> getAllProjects() {
+       public Set<Project> getAllProjects() {
         //log.debug("I'm in the service");
 
         Set<Project> projectSet = new HashSet<>();
         projectRepository.findAll().iterator().forEachRemaining(projectSet::add);
         return projectSet;
-    }
+       }
 
 
     @Override

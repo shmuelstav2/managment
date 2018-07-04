@@ -11,7 +11,6 @@ import java.util.function.Predicate;
 public class UserSpecification implements Specification<User> {
 
     private final User criteria;
-
     public UserSpecification(User criteria) {
         this.criteria=criteria;
     }
@@ -20,10 +19,6 @@ public class UserSpecification implements Specification<User> {
     public javax.persistence.criteria.Predicate toPredicate(Root<User> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
         return null;
     }
-
-    //@Override
-    //public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-        // create query/predicate here.
 
 
 }

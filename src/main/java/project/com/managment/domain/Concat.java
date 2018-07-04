@@ -1,22 +1,19 @@
+
+/******************************
+ *           Concats table Class
+ *******************************/
+
+
 package project.com.managment.domain;
-
-//import lombok.*;
-
 import javax.persistence.*;
-
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.NoArgsConstructor;
-
 import java.util.Objects;
 
-import javax.persistence.*;
 
 
 
 @Entity
-//@NoArgsConstructor
-
 @Table(name = "concats")
 public class Concat {
 
@@ -97,8 +94,7 @@ public class Concat {
 
     @Override
     public String toString() {
-        return "Concat [id=" + id + ", name="
-                + "]";
+        return "Concat [id=" + id + ", name=" + "]";
     }
 }
 

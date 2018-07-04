@@ -19,6 +19,5 @@ import java.util.List;
 
 
 public interface PaymentsRepository extends JpaRepository<Payments, Long> {
-  //  Set<Project> findAllByPartner(int partner);
-  //  Set<Project> findAllByActive(boolean active);
+
 }

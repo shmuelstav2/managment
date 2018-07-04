@@ -1,5 +1,9 @@
-package project.com.managment.domain;
+/******************************
+ *           Address Class
+ *******************************/
 
+
+package project.com.managment.domain;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

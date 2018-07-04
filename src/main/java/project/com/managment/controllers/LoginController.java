@@ -39,7 +39,6 @@ public class LoginController {
             jo.put("status", 5);
         }
         else {
-
             if (current.getId() == null) {
                 // if the user doesnt exist return 5
                 jo.put("status", 5);

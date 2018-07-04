@@ -16,16 +16,4 @@ public interface PaymentsService  {
     Payments createNewPayments(Long projectid,Payments payments);
     Payments paymentsById(Long id);
     Payments updatePayments(Long id,Long projectid,Payments payments);
-
-   /* Set<Project> getAllProjects();
-    public Purchase createNewPurchase(Long id, Purchase purchase);
-//    User getUserByIdNumber(int idNumber);
-
-    Project createNewProject(Project project);
-    Project getProjectById(Long id);
-    Set<Project> getProjectByPartner(int patner);
-    Set<Project> getProjectByActive(boolean active);
-    Project updateProject(Long idNumber,Project project);
-    Project updateProjectImage(Long idNumber,String imageLink);
-    */
 }

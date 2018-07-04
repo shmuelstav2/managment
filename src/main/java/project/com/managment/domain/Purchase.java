@@ -49,6 +49,7 @@ public class Purchase {
     private Project project;
 
 
+    //method to export date with string format
     public void setDateString(LocalDate date){
         this.date = date;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");

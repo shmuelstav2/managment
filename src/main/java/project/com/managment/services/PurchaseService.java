@@ -18,16 +18,4 @@ public interface PurchaseService {
     public Purchase createNewPurchase(Long id,Purchase purchase);
      public Purchase updatePurchase(Long purchaseid,Purchase purchase);
      public Purchase getPurchase(Long purchaseid);
-    /*
-    Set<Project> getAllProjects();
-
-//    User getUserByIdNumber(int idNumber);
-
-    Project createNewProject(Project project);
-    Project getProjectById(Long id);
-    Set<Project> getProjectByPartner(int patner);
-    Set<Project> getProjectByActive(boolean active);
-    Project updateProject(Long idNumber,Project project);
-    Project updateProjectImage(Long idNumber,String imageLink);
-    */
 }

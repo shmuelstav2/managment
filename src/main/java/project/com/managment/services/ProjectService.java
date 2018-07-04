@@ -8,14 +8,12 @@ import java.util.Set;
 
 public interface ProjectService {
 
-      Set<Project> getAllProjects();
+    Set<Project> getAllProjects();
     public Purchase createNewPurchase(Long id, Purchase purchase);
-//    User getUserByIdNumber(int idNumber);
-
     Project createNewProject(Project project);
     Project getProjectById(Long id);
     Set<Project> getProjectByPartner(int patner);
-      Set<Project> getProjectByActive(boolean active);
+    Set<Project> getProjectByActive(boolean active);
     Project updateProject(Long idNumber,Project project);
     Project updateProjectImage(Long idNumber,String imageLink);
 }

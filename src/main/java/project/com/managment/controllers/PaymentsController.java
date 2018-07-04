@@ -35,7 +35,7 @@ import io.swagger.annotations.Api;
         import java.util.List;
 import java.util.Set;
 
-@Api(description = "manage all the users data")
+@Api(description = "manage all the Payments data")
 @Controller
 @RequestMapping("/api/payments")
 public class PaymentsController {
@@ -86,60 +86,5 @@ public class PaymentsController {
 
     }
 }
-
-    /*  @ApiOperation(value = "get user by id number", notes = "These are some notes about the API.")
-      @GetMapping({"/{id}"})
-      public ResponseEntity<User> getUserById(@PathVariable Long id){
-          return new ResponseEntity<User>(userService.getUserById(id), HttpStatus.OK);
-      }
-  */
-    /*
-    @ApiOperation(value = "get user by id of identication", notes = "These are some notes about the API.")
-    @GetMapping({"/{idnumber}"})
-    public ResponseEntity<User> getUserByIdNumber(@PathVariable("idnumber") Long idNumber){
-        return new ResponseEntity<User>(userService.getUserByIdNumber(idNumber), HttpStatus.OK);
-    }
-
-
-    @ApiOperation(value = "get user by Role", notes = "These are some notes about the API.")
-    @GetMapping({"/role/{role}"})
-    public ResponseEntity<List<User>> getUserById(@PathVariable Role role){
-        return new ResponseEntity<List<User>>(userService.getUsersByRole(role), HttpStatus.OK);
-    }
-
-    @ApiOperation(value = "check login operation", notes = "These are some notes about the API.")
-    @PostMapping("/login")
-
-    public ResponseEntity <String> checkUserLogin(@RequestBody User user){
-        //User current = userService.getUserByIdNumber(user.getIdNumber());
-        User current =new User();
-        JSONObject jo = new JSONObject();
-        if(current.getId()== null){
-            // if the user doesnt exist return 5
-            jo.put("status", 5);
-        }else {
-            if(!current.getPassword().equals(user.getPassword())){
-                //if the use exist but the passo 4
-                jo.put("status", 4);
-            }else{
-                // and if both are true return the role number
-                jo.put("status", current.getRole());
-            }
-        }
-
-        return new ResponseEntity <String>(jo.toString(),
-                HttpStatus.OK);
-    }
-
-
-    @ApiOperation(value = "update the user by the idNumber", notes = "Please be carefill provide only the new data")
-    @PutMapping({"/{idNumber}"})
-    public ResponseEntity <User> updateUser(@PathVariable Long idNumber, @RequestBody User user) {
-        return new ResponseEntity<User>(userService.updateUser(idNumber, user),
-                HttpStatus.OK);
-    }
-    //    return new ResponseEntity <String>("huiyhui",
-    //          HttpStatus.OK);
-}*/
 
 

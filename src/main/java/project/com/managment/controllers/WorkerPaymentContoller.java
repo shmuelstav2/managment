@@ -52,7 +52,7 @@ import java.io.File;
                 import org.springframework.web.bind.annotation.RequestMapping;
                 import java.util.List;
 
-@Api(description = "manage all the work days data")
+@Api(description = "manage all the work days payments data")
 @Controller
 @RequestMapping("/api/workerpayments/")
 public class WorkerPaymentContoller {

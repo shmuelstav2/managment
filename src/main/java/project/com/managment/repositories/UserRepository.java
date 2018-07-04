@@ -9,10 +9,9 @@ import java.util.List;
 
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByIdNumber(BigInteger idNumber);
-   List<User> findAllByLastName(String lastname);
-    List<User> findAllByRole(Role role);
-  // List<User> findByLastname(String lastname);
-    User findById(Long id);
-    User getDistinctFirstByIdNumber(BigInteger id );
+     User findByIdNumber(BigInteger idNumber);
+     List<User> findAllByLastName(String lastname);
+     List<User> findAllByRole(Role role);
+     User findById(Long id);
+     User getDistinctFirstByIdNumber(BigInteger id );
 }

@@ -1,5 +1,9 @@
-package project.com.managment.domain;
 
+
+/******************************
+ *           Payment Method table Class
+ *******************************/
+package project.com.managment.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
@@ -19,9 +23,6 @@ import javax.persistence.*;
 
 
 @NoArgsConstructor
-
-
-
 @Data
 @Entity
 @Table(name = "Payments",uniqueConstraints={@UniqueConstraint(columnNames = {"id"})})

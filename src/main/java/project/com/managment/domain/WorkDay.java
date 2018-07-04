@@ -56,6 +56,8 @@ public class WorkDay {
   /*
     projectId Project
   */
+
+  //method for calculate the salary
  public void calcDailySalary(LocalTime checkOutTime){
      double salary =0;
      if(checkOut==null){

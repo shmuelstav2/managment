@@ -12,10 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import project.com.managment.repositories.UserRepository;
 import project.com.managment.services.UserDetailsServiceImp;
 
-/**
- * @author Joe Grandja
- */
-//https://github.com/gustavoponce7/SpringSecurityUserDetailsService/blob/master/src/main/java/com/example/service/UserServiceImpl.java
+
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserRepository userRepository;
@@ -29,20 +26,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/login/**", "/index").hasAnyRole("MAINMANAGER","SECONDMANAGER", "EMPLOYEE")
-                .antMatchers("/api/users/**").hasRole("MAINMANAGER")
+               // .antMatchers("/api/users/**").hasRole("MAINMANAGER")
                 .and()
                 .httpBasic();
-                //.formLogin().loginPage("/login").failureUrl("/login-error");
-    }
-    // @formatter:on
 
-    // @formatter:off
-   /* @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
-    }*/
+    }
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -58,6 +46,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
     }
-
-    // @formatter:on
 }
