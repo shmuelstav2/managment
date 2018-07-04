@@ -49,6 +49,7 @@ public class LoginController {
                     jo.put("status", 4);
                 } else {
                     jo.put("status", current.getRole());
+                    jo.put("id", current.getId());
                 }
             }
         }

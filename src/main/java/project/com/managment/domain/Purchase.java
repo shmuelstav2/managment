@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
         import javax.persistence.*;
         import java.awt.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
         import org.hibernate.annotations.Fetch;
@@ -41,8 +42,16 @@ public class Purchase {
     private int invoiceNum;
     private String  imageLink;
     private String comment;
+    String formattedStringDate;
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
+
+
+    public void setDateString(LocalDate date){
+        this.date = date;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        this.formattedStringDate = date.format(formatter);
+    }
 }

@@ -56,7 +56,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     public Purchase createNewPurchase(Long id,Purchase purchase) {
         Project current = projectService.getProjectById(id);
         purchase.setProject(current);
-        purchase.setDate(LocalDate.now());
+        purchase.setDateString(LocalDate.now());
         Purchase savedPurchase = purchaseRepository.save(purchase);
         return savedPurchase;
     }
@@ -64,7 +64,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     public Purchase updatePurchase(Long purchaseid,Purchase purchase){
        Purchase current = purchaseRepository.findOne(purchaseid);
        purchase.setId(current.getId());
-        purchase.setDate(LocalDate.now());
+        purchase.setDateString(LocalDate.now());
        return (purchaseRepository.save(purchase));
        }
 
